@@ -38,7 +38,7 @@ export default function LoginComponent(props) {
         return (
             <Redirect to={
                 {
-                  pathname: '/',
+                  pathname: auth.user.customer_id? '/customer':'/employee',
                   state: {
                     from: props.location
                   }

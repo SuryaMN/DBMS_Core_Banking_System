@@ -24,7 +24,8 @@ router.post('/', async (req, res) => {
                 const jwtToken = jwtGenerator(newCustomer.rows[0].username,'customer',newCustomer.rows[0].customer_id);
                 return res.status(200).json({
                     jwtToken,
-                    user:newCustomer.rows[0]
+                    user:newCustomer.rows[0],
+                    role:'customer'
                 })
 
             } catch (err) {

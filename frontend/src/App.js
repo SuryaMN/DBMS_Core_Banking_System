@@ -9,18 +9,31 @@ import LoginComponent from './components/LoginComponent';
 import CustomerDashboard from './components/CustomerDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import EmployeeDashboard from './components/EmployeeDashboard';
+import TransactionComponent from './components/TransactionComponent';
+import AccountComponent from './components/AccountComponent';
+import FetchTransactionsComponent from './components/FetchTransactionsComponent';
+import CreateAccountComponent from './components/CreateAccountComponent';
 
 
 
+store.dispatch(loadUser())
 
 function App() {
+  // const auth = useSelector(state => state.auth);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  // }, []) 
   
   return (
     <Provider store={store}>
       <Router>
         <Route exact path='/signup' component={SignupComponent}  />
-        <ProtectedRoute exact path='/' component={CustomerDashboard} />
-        {/* <ProtectedRoute exact path='/employee' component={EmployeeDashboard} /> */}
+        <ProtectedRoute exact path='/customer' component={CustomerDashboard} role='customer' />
+        <ProtectedRoute exact path='/employee' component={EmployeeDashboard} role='employee' />
+        <ProtectedRoute exact path='/transaction' component={TransactionComponent} role='customer' />
+        <ProtectedRoute exact path='/accounts' component={AccountComponent} role='customer' />
+        <ProtectedRoute exact path='/fetchTransactions/:account_no' component={FetchTransactionsComponent} role='customer' />
+        <ProtectedRoute exact path='/createAccount' component={CreateAccountComponent} role='employee' />
         <Route exact path='/login' component={LoginComponent}  />
 
       </Router>

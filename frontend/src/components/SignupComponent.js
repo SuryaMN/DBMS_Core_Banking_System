@@ -3,7 +3,7 @@ import {Link,Redirect} from 'react-router-dom'
 import {useSelector,useDispatch} from 'react-redux';
 import { signupUser } from '../redux/auth/authActions';
 
-export default function SignupComponent() {
+export default function SignupComponent(props) {
 
 
     const auth = useSelector(state => state.auth)
@@ -35,15 +35,15 @@ export default function SignupComponent() {
 
     if(auth.isAuthenticated){
         return (
-            // <Redirect to={
-            //     {
-            //       pathname: '/',
-            //       state: {
-            //         from: props.location
-            //       }
-            //     }
-            //   } />
-            <h3>Signup Success</h3>
+            <Redirect to={
+                {
+                  pathname: '/customer',
+                  state: {
+                    from: props.location
+                  }
+                }
+              } />
+            // <h3>Signup Success</h3>
         )
     }
     else if(auth.loading){

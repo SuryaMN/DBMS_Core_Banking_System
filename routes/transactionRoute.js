@@ -21,9 +21,21 @@ router.post('/payment',customerAuth,async(req,res)=>{
         return res.status(200).json(transaction.rows[0]);
         
     }catch(err){
-        return res.status(500).json(err.message);//change this
+        // return res.status(500).json(err.message);change this
+        return res.status(500).json({msg:"Server Error"})
     }
     
 })
+
+router.post('/get',customerAuth,async (req,res)=>{
+    const {remitter_acc_no} = req.body;
+    try{
+        const transactions = await pool.query("select * from transaction where remitter_acc_no = $1 union select * from transaction where beneficiary_acc_no = $1 order by timestamp desc",[req.body.remitter_acc_no])
+        return res.status(200).json(transactions.rows);
+    }catch(err){
+        return res.status(500).json({msg:"Server Error"})
+    }
+})
+
 
 module.exports = router;

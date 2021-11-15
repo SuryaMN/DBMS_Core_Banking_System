@@ -42,7 +42,8 @@ router.post('/',async (req,res)=>{
         else if(role === 'employee')  jwtToken = jwtGenerator(user.rows[0].username,role,user.rows[0].employee_id);
         return res.json({
            jwtToken,
-           user:user.rows[0]
+           user:user.rows[0],
+           role
         });
       } catch (err) {
         // res.status(500).json(err.message);

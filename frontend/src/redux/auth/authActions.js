@@ -36,11 +36,11 @@ export function loginSuccess(user){
     }
 }
 
-// export function logoutSuccess(){
-//     return{
-//         type:LOGOUT_SUCCESS
-//     }
-// }
+export function logoutSuccess(){
+    return{
+        type:LOGOUT_SUCCESS
+    }
+}
 
 export function signupFailed(error){
     return{
@@ -69,7 +69,7 @@ export function loadUser(){
             }
         }
         if(token) config.headers['jwtToken']=token;
-        axios.get('http://localhost:8000/api/loadUser',config)
+        axios.get('http://localhost:8000/api/user/loadUser',config)
         .then(result => {
           
             dispatch(userLoaded(result.data))
@@ -125,9 +125,9 @@ export function loginUser({username,password,role}){
     }
 }
 
-// export function logout(){
-//     return function (dispatch){
-//         dispatch(logoutSuccess());
-//         window.location.href = '/login';
-//     }
-// }
+export function logout(){
+    return function (dispatch){
+        dispatch(logoutSuccess());
+        // window.location.href = '/login';
+    }
+}
