@@ -74,7 +74,7 @@ export default function SignupComponent(props) {
                         {/* <div className="form-group">
                             <div className="form-check"><label className="form-check-label"><input className="form-check-input" type="checkbox" />I agree to the license terms.</label></div>                
                         </div> */}
-                        <div><button type="submit">Signup</button></div><Link to="/login">Already registered? Login here.</Link>
+                        <div><button type="submit">Signup</button></div>Already registered? <Link to="/login">Login here.</Link>
                     </form>
                 </div>
 

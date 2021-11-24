@@ -6,7 +6,7 @@ export default function TransactionComponent() {
     
     
     const auth = useSelector(state => state.auth)
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     
     const [transaction, setTransaction] = useState({
         transaction_type:'',

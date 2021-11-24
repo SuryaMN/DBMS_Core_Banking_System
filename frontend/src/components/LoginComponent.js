@@ -69,7 +69,7 @@ export default function LoginComponent(props) {
                         <option value="customer">Customer</option>
                         <option value="employee">Employee</option>
                     </select>
-                    <div><button type="submit">Login</button></div><Link to="/signup">Don't have an account? Signup here.</Link>
+                    <div><button type="submit">Login</button></div>Don't have an account?<Link to="/signup"> Signup here.</Link>
 
                 </form>
 

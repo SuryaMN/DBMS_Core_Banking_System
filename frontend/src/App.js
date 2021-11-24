@@ -13,6 +13,8 @@ import TransactionComponent from './components/TransactionComponent';
 import AccountComponent from './components/AccountComponent';
 import FetchTransactionsComponent from './components/FetchTransactionsComponent';
 import CreateAccountComponent from './components/CreateAccountComponent';
+import LoanApplyComponent from './components/LoanApplyComponent';
+import LoanResolveComponent from './components/LoanResolveComponent';
 
 
 
@@ -34,6 +36,8 @@ function App() {
         <ProtectedRoute exact path='/accounts' component={AccountComponent} role='customer' />
         <ProtectedRoute exact path='/fetchTransactions/:account_no' component={FetchTransactionsComponent} role='customer' />
         <ProtectedRoute exact path='/createAccount' component={CreateAccountComponent} role='employee' />
+        <ProtectedRoute exact path='/loanApply' component={LoanApplyComponent} role='customer' />
+        <ProtectedRoute exact path='/loanResolve' component={LoanResolveComponent} role='employee' />
         <Route exact path='/login' component={LoginComponent}  />
 
       </Router>
