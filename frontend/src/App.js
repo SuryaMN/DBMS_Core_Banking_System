@@ -15,20 +15,21 @@ import FetchTransactionsComponent from './components/FetchTransactionsComponent'
 import CreateAccountComponent from './components/CreateAccountComponent';
 import LoanApplyComponent from './components/LoanApplyComponent';
 import LoanResolveComponent from './components/LoanResolveComponent';
+import InactiveAccounts from './components/InactiveAccounts';
+import HighestWorthTransactionsComponent from './components/HighestWorthTransactionsComponent';
+import NoAccountComponent from './components/NoAccountComponent';
+import HomeComponent from './components/HomeComponent';
 
 
 
 store.dispatch(loadUser())
 
 function App() {
-  // const auth = useSelector(state => state.auth);
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  // }, []) 
   
   return (
     <Provider store={store}>
       <Router>
+        <Route exact path='/' component={HomeComponent}  />
         <Route exact path='/signup' component={SignupComponent}  />
         <ProtectedRoute exact path='/customer' component={CustomerDashboard} role='customer' />
         <ProtectedRoute exact path='/employee' component={EmployeeDashboard} role='employee' />
@@ -38,6 +39,9 @@ function App() {
         <ProtectedRoute exact path='/createAccount' component={CreateAccountComponent} role='employee' />
         <ProtectedRoute exact path='/loanApply' component={LoanApplyComponent} role='customer' />
         <ProtectedRoute exact path='/loanResolve' component={LoanResolveComponent} role='employee' />
+        <ProtectedRoute exact path='/notActive' component={InactiveAccounts} role='employee' />
+        <ProtectedRoute exact path='/maxAmountTransactions' component={HighestWorthTransactionsComponent} role='employee' />
+        <ProtectedRoute exact path='/noAccount' component={NoAccountComponent} role='employee' />
         <Route exact path='/login' component={LoginComponent}  />
 
       </Router>

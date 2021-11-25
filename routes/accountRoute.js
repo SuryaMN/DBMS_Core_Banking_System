@@ -31,7 +31,7 @@ router.post('/create',employeeAuth,async (req,res)=>{
             return res.status(500).json({msg:"Unsuccessful Query"})
         }
     }catch(err){
-        return res.status(500).json({msg:"Unsuccessful Query"})
+        return res.status(500).json({msg:"Server Error"})
     }
 
 
@@ -49,6 +49,17 @@ router.post('/balance',customerAuth,async (req,res)=>{
     }
 
 })
+
+
+router.get('/noAccount',employeeAuth,async (req,res)=>{
+    try{
+        const customers = await pool.query("select * from customer where customer_id not in (select customer_id from account natural join customer)");
+        return res.status(200).json(customers.rows)
+    }catch(err){
+        return res.status(500).json({msg:"Server Error"})
+    }
+})
+
 
 
 module.exports = router;

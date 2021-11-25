@@ -2,6 +2,7 @@ const pool = require("../db");
 const router = require("express").Router();
 require('dotenv').config();
 const customerAuth = require('../middleware/customerAuth');
+const employeeAuth = require("../middleware/employeeAuth");
 
 router.post('/payment',customerAuth,async(req,res)=>{
     const {transaction_type,remitter_acc_no,beneficiary_acc_no,amount} = req.body;
@@ -36,6 +37,29 @@ router.post('/get',customerAuth,async (req,res)=>{
         return res.status(500).json({msg:"Server Error"})
     }
 })
+
+router.get('/notActive',employeeAuth,async (req,res)=>{
+    try{
+        const accounts = await pool.query("select * from account where acc_number in (select acc_number from account except (select distinct remitter_acc_no from transaction where timestamp between now() - INTERVAL '24 HOURS' AND NOW() union  select distinct beneficiary_acc_no from transaction where timestamp between now() - INTERVAL '24 HOURS' AND NOW()))");
+        // if(accounts.rows === 0)
+        //     return res.json(400).json({msg:"No accounts found"})
+        return res.status(200).json(accounts.rows)
+    }catch(err){
+        return res.status(500).json({msg:"Server Error"})
+    }
+})
+
+router.get('/maxAmountTransactions',employeeAuth,async (req,res)=>{
+    try{
+        const accounts = await pool.query(" (select acc_number,sum(sum) as amount from (select remitter_acc_no as acc_number,sum(amount) from transaction group by remitter_acc_no union select beneficiary_acc_no as acc_number,sum(amount) from transaction group by beneficiary_acc_no)as temp group by acc_number) order by amount desc");
+        // if(accounts.rows === 0)
+        //     return res.json(400).json({msg:"No accounts found"})
+        return res.status(200).json(accounts.rows)
+    }catch(err){
+        return res.status(500).json({msg:"Server Error"})
+    }
+})
+
 
 
 module.exports = router;

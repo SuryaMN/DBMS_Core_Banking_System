@@ -53,7 +53,7 @@ export default function CreateAccountComponent() {
 
     return (
         <div>
-
+            <h2>Create Account</h2>
             <form onSubmit={handleSubmit}>
 
                 <input type='number' onChange={handleChange} name='customer_id' placeholder='Customer ID' value={account.customer_id} />

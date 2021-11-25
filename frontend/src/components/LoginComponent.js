@@ -16,7 +16,7 @@ export default function LoginComponent(props) {
     const [user, setUser] = useState({
         username: "",
         password: "",
-        role: "customer"
+        role: ""
     })
 
     function handleChange(event) {
@@ -58,7 +58,7 @@ export default function LoginComponent(props) {
             <div>
                 <h2 className="text-center"><strong>Login</strong></h2>
                 {auth.error?(
-                        <div>
+                        <div style={{color:'red'}}>
                             {auth.error}
                         </div>):null
                     }
@@ -66,6 +66,7 @@ export default function LoginComponent(props) {
                     <input type="text" name="username" placeholder="Username" onChange={handleChange} value={user.username} />
                     <input type="password" name="password" placeholder="Password" onChange={handleChange} value={user.password} />
                     <select name="role" onChange={handleChange}>
+                        <option value="">Select Role</option>
                         <option value="customer">Customer</option>
                         <option value="employee">Employee</option>
                     </select>

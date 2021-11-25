@@ -5,10 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 const ProtectedRoute = ({ component: Component,role, ...rest }) => {
   const auth = useSelector(state => state.auth);
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //     dispatch(loadUser())
-  // }, []) 
+  
 
   return (
     <Route {...rest} render={
