@@ -36,9 +36,10 @@ export default function FetchTransactionsComponent(props) {
             </div>
         )
     }
-
+    
     else{
-
+        // const createdDate = transactions.timestamp.toLocaleDateString('en-US');
+        // const createdTime = createdAt.toLocaleTimeString('en-US');      
         return (
             <div>
                 <h2>Your transactions</h2>
@@ -48,6 +49,7 @@ export default function FetchTransactionsComponent(props) {
                         return (
                             <div key={transaction.transaction_id}  style={{borderStyle:'solid',margin:'10px',padding:'10px'}}>
                                 <h4>Transaction ID : {transaction.transaction_id}</h4>
+                                <h4>Time : {transaction.timestamp.slice(0,10)} , {transaction.timestamp.slice(11,19)}</h4>
                                 <h4 style={{color:props.match.params.account_no==transaction.remitter_acc_no?'red':'green'}}>Amount : {transaction.amount}</h4>
                                 <h4>Remitter : {transaction.remitter_acc_no}</h4>
                                 <h4>Beneficiary : {transaction.beneficiary_acc_no}</h4>

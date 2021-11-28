@@ -9,7 +9,10 @@ router.post('/payment',customerAuth,async(req,res)=>{
     if( !transaction_type || !remitter_acc_no || !beneficiary_acc_no || !amount )
         return res.status(400).json({msg:"Enter all fields"});
 
-    try{    
+    try{
+        if(remitter_acc_no === beneficiary_acc_no)
+            return res.status(400).json({msg:"Remitter and Beneficiary Account Numbers cannot be same"});
+            
         const beneficiary_account = await pool.query("select * from account where acc_number = $1", [beneficiary_acc_no]);
         if(beneficiary_account.rows.length === 0)
             return res.status(400).json({msg:"Invalid Beneficiary Account Number"});

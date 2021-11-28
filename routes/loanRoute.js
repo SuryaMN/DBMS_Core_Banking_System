@@ -39,8 +39,7 @@ router.post('/resolve',employeeAuth,async (req,res)=>{
 })
 
 router.get('/pending',employeeAuth,async (req,res)=>{
-    // if(req.params.acc_no === null)
-    //     return res.status(400).json({msg:"Enter valid account number"});
+  
     try{
         const loans = await pool.query("select * from loan where status = 'Pending' ");
         return res.status(200).json(loans.rows);
